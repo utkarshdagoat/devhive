@@ -14,6 +14,7 @@ import {
   AuthType,
   ClaimType,
 } from "./sismo-connect-config";
+import { ModeToggle } from "@/components/modeToggle";
 
 export default function Home() {
   const [sismoConnectVerifiedResult, setSismoConnectVerifiedResult] =
@@ -24,6 +25,8 @@ export default function Home() {
 
   return (
     <>
+      <h1 className="text-3xl font-bold">Hello world! <ModeToggle></ModeToggle></h1>
+      <br />
       <main className="main">
         {pageState == "init" ? (
           <>
@@ -43,6 +46,7 @@ export default function Home() {
                 const data = await verifiedResult.json();
                 if (verifiedResult.ok) {
                   setSismoConnectVerifiedResult(data);
+                  console.log(data);
                   setPageState("verified");
                 } else {
                   setPageState("error");
@@ -77,7 +81,7 @@ export default function Home() {
             </div>
           </>
         )}
-        {sismoConnectVerifiedResult && (
+        {/* {sismoConnectVerifiedResult && (
           <>
             <h3>Verified Auths</h3>
             <table>
@@ -99,8 +103,8 @@ export default function Home() {
           </>
         )}
 
-        <br />
-        {sismoConnectVerifiedResult && (
+        <br /> */}
+        {/* {sismoConnectVerifiedResult && (
           <>
             <h3>Verified Claims</h3>
             <table>
@@ -222,7 +226,7 @@ export default function Home() {
               </td>
             </tr>
           </tbody>
-        </table>
+        </table> */}
       </main>
     </>
   );
@@ -230,7 +234,7 @@ export default function Home() {
 
 function readibleHex(userId: string, startLength = 6, endLength = 4, separator = "...") {
   if (!userId.startsWith("0x")) {
-    return userId; 
+    return userId;
   }
   return userId.substring(0, startLength) + separator + userId.substring(userId.length - endLength);
 }
@@ -249,7 +253,7 @@ function getProofDataForAuth(
     }
   }
 
-  return null; 
+  return null;
 }
 
 function getProofDataForClaim(
@@ -268,5 +272,5 @@ function getProofDataForClaim(
     }
   }
 
-  return null; 
+  return null;
 }
